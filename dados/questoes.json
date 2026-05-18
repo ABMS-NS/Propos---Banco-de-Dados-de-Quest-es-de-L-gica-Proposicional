@@ -1,0 +1,696 @@
+[
+  {
+    "id": "q001",
+    "formula": "P -> Q",
+    "variaveis": [
+      "P",
+      "Q"
+    ],
+    "operadores": [
+      "->"
+    ],
+    "complexidade": 1,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 2
+  },
+  {
+    "id": "q002",
+    "formula": "(P ^ ~Q) v (R ^ S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "TABELA_VERDADE",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q003",
+    "formula": "(P v Q) ^ ~(R ^ S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "TABELA_VERDADE",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q004",
+    "formula": "P -> (Q ^ R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^"
+    ],
+    "complexidade": 2,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q005",
+    "formula": "~P v (Q ^ R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q006",
+    "formula": "(P ^ Q) -> R",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^"
+    ],
+    "complexidade": 2,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q007",
+    "formula": "(P -> Q) ^ (R -> S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "^"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q008",
+    "formula": "~(P v Q) ^ R",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q009",
+    "formula": "P v (Q ^ ~R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q010",
+    "formula": "(P ^ Q) v ~R",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q011",
+    "formula": "P -> (Q v R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "v"
+    ],
+    "complexidade": 2,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q012",
+    "formula": "~(P ^ Q) -> R",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q013",
+    "formula": "P v ~(Q -> R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "v",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q014",
+    "formula": "(P ^ ~Q) -> (R v S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q015",
+    "formula": "~P -> (Q ^ ~R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "CIRCUNSTANCIAS_FALSAS"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q016",
+    "formula": "(P -> Q) v (R -> ~P)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q017",
+    "formula": "(P ^ Q ^ R) -> S",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "^"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "TABELA_VERDADE"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q018",
+    "formula": "~(P v Q v R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "v",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q019",
+    "formula": "P ^ (Q v (R ^ S))",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "^",
+      "v"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "TABELA_VERDADE",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q020",
+    "formula": "(P v Q) -> (R v ~S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q021",
+    "formula": "~(P ^ ~Q) v R",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "CIRCUNSTANCIAS_FALSAS",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q022",
+    "formula": "P -> (Q -> (R -> S))",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q023",
+    "formula": "(P ^ Q) v (R ^ ~S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "TABELA_VERDADE",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q024",
+    "formula": "(P v ~Q) ^ (R v ~S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 5,
+    "tipos_recomendados": [
+      "CIRCUNSTANCIAS_FALSAS",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q025",
+    "formula": "(P v Q) -> ~(R v S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q026",
+    "formula": "P ^ (~Q v R) -> S",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q027",
+    "formula": "~(P -> Q) ^ (R v S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q028",
+    "formula": "(P ^ Q) -> (R ^ ~S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "TABELA_VERDADE"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q029",
+    "formula": "P v (Q ^ (R -> S))",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "v"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q030",
+    "formula": "~(P ^ Q ^ ~R) v S",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 5,
+    "tipos_recomendados": [
+      "CIRCUNSTANCIAS_FALSAS",
+      "TABELA_VERDADE",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q031",
+    "formula": "P -> ~(Q ^ R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q032",
+    "formula": "(P v ~Q) ^ (~R v S)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R",
+      "S"
+    ],
+    "operadores": [
+      "^",
+      "v",
+      "~"
+    ],
+    "complexidade": 5,
+    "tipos_recomendados": [
+      "CIRCUNSTANCIAS_FALSAS",
+      "EQUIVALENCIA"
+    ],
+    "num_variaveis": 4
+  },
+  {
+    "id": "q033",
+    "formula": "P ^ (Q -> R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^"
+    ],
+    "complexidade": 2,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q034",
+    "formula": "~P -> ~(Q ^ R)",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "~"
+    ],
+    "complexidade": 4,
+    "tipos_recomendados": [
+      "INFERENCIA",
+      "CIRCUNSTANCIAS_FALSAS"
+    ],
+    "num_variaveis": 3
+  },
+  {
+    "id": "q035",
+    "formula": "(P -> Q) ^ ~R",
+    "variaveis": [
+      "P",
+      "Q",
+      "R"
+    ],
+    "operadores": [
+      "->",
+      "^",
+      "~"
+    ],
+    "complexidade": 3,
+    "tipos_recomendados": [
+      "INFERENCIA"
+    ],
+    "num_variaveis": 3
+  }
+]

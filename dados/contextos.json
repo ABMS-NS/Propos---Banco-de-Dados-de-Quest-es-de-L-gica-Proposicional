@@ -1,0 +1,672 @@
+[
+  {
+    "id": "c001",
+    "texto": "Um detetive quer descobrir um roubo no banco",
+    "tema": "investigacao",
+    "dominio": "policial",
+    "tags": [
+      "detetive",
+      "roubo"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c002",
+    "texto": "Um médico tenta fechar um diagnóstico complexo",
+    "tema": "medicina",
+    "dominio": "saude",
+    "tags": [
+      "médico",
+      "diagnóstico"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c003",
+    "texto": "Um engenheiro avalia a segurança estrutural de uma ponte",
+    "tema": "engenharia",
+    "dominio": "infraestrutura",
+    "tags": [
+      "engenheiro",
+      "ponte",
+      "estrutural",
+      "estrutura"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c004",
+    "texto": "Um programador investiga um bug crítico em um sistema de pagamentos",
+    "tema": "tecnologia",
+    "dominio": "software",
+    "tags": [
+      "programador",
+      "bug",
+      "sistema",
+      "pagamentos"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c005",
+    "texto": "Um juiz analisa as contradições nos depoimentos de testemunhas",
+    "tema": "investigacao",
+    "dominio": "policial",
+    "tags": [
+      "testemunha",
+      "depoimento"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c006",
+    "texto": "Um estrategista militar planeja rotas de fuga seguras",
+    "tema": "estrategia",
+    "dominio": "militar",
+    "tags": [
+      "estrategista",
+      "militar",
+      "rotas"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c007",
+    "texto": "Um biólogo estuda a relação entre espécies em um ecossistema isolado",
+    "tema": "biologia",
+    "dominio": "natureza",
+    "tags": [
+      "biólogo",
+      "espécies",
+      "ecossistema",
+      "espécie"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c008",
+    "texto": "Um inspetor escolar avalia o cumprimento de regras pelos alunos",
+    "tema": "educacao",
+    "dominio": "escolar",
+    "tags": [
+      "escola",
+      "alunos",
+      "inspetor escolar"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c009",
+    "texto": "Um capitão de navio decide a melhor rota em meio a uma tempestade",
+    "tema": "navegacao",
+    "dominio": "transporte",
+    "tags": [
+      "capitão",
+      "navio",
+      "tempestade"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c010",
+    "texto": "Um cientista espacial interpreta sinais captados de um exoplaneta",
+    "tema": "ciencia",
+    "dominio": "espacial",
+    "tags": [
+      "cientista",
+      "espacial",
+      "exoplaneta"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c011",
+    "texto": "Um astrônomo analisa o brilho de uma estrela variável",
+    "tema": "astronomia",
+    "dominio": "espacial",
+    "tags": [
+      "astrônomo",
+      "estrela"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c012",
+    "texto": "Um chef de cozinha testa a acidez de um novo molho",
+    "tema": "culinaria",
+    "dominio": "alimentacao",
+    "tags": [
+      "chef",
+      "cozinha",
+      "molho"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c013",
+    "texto": "Um arqueólogo escava ruínas de uma civilização antiga",
+    "tema": "arqueologia",
+    "dominio": "historia",
+    "tags": [
+      "arqueólogo",
+      "ruínas",
+      "civilização",
+      "escava"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c014",
+    "texto": "Um piloto de avião calcula a reserva de combustível para um desvio",
+    "tema": "navegacao",
+    "dominio": "transporte",
+    "tags": [
+      "piloto",
+      "avião"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c015",
+    "texto": "Um bibliotecário organiza obras raras por período histórico",
+    "tema": "biblioteconomia",
+    "dominio": "cultura",
+    "tags": [
+      "bibliotecário",
+      "obras raras"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c016",
+    "texto": "Um urbanista planeja a expansão de ciclovias em uma metrópole",
+    "tema": "urbanismo",
+    "dominio": "cidades",
+    "tags": [
+      "urbanista",
+      "ciclovias",
+      "metrópole"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c017",
+    "texto": "Um meteorologista prevê a chegada de uma frente fria",
+    "tema": "meteorologia",
+    "dominio": "clima",
+    "tags": [
+      "meteorologista",
+      "frente fria"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c018",
+    "texto": "Um especialista em segurança digital bloqueia uma tentativa de invasão",
+    "tema": "tecnologia",
+    "dominio": "software",
+    "tags": [
+      "segurança digital"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c019",
+    "texto": "Um químico mistura reagentes para sintetizar um novo polímero",
+    "tema": "quimica",
+    "dominio": "laboratorio",
+    "tags": [
+      "químico",
+      "reagentes",
+      "polímero"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c020",
+    "texto": "Um historiador confronta relatos de diferentes cronistas sobre uma batalha",
+    "tema": "historia",
+    "dominio": "cultura",
+    "tags": [
+      "historiador",
+      "cronistas",
+      "batalha"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c021",
+    "texto": "Um jornalista investiga um esquema de corrupção em uma prefeitura",
+    "tema": "jornalismo",
+    "dominio": "comunicacao",
+    "tags": [
+      "jornalista",
+      "corrupção",
+      "prefeitura"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c022",
+    "texto": "Um botânico classifica uma nova espécie de orquídea na Amazônia",
+    "tema": "botanica",
+    "dominio": "natureza",
+    "tags": [
+      "botânico",
+      "orquídea",
+      "amazônia"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c023",
+    "texto": "Um geólogo estuda a atividade sísmica em uma falha tectônica",
+    "tema": "geologia",
+    "dominio": "natureza",
+    "tags": [
+      "geólogo",
+      "sísmica",
+      "falha tectônica"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c024",
+    "texto": "Um advogado busca precedentes para fundamentar a defesa de um cliente",
+    "tema": "direito",
+    "dominio": "juridico",
+    "tags": [
+      "advogado",
+      "defesa",
+      "precedentes"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c025",
+    "texto": "Um arquiteto projeta a iluminação natural de um museu",
+    "tema": "arquitetura",
+    "dominio": "cidades",
+    "tags": [
+      "arquiteto",
+      "museu",
+      "iluminação"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c026",
+    "texto": "Um músico busca a harmonia ideal para uma composição clássica",
+    "tema": "musica",
+    "dominio": "arte",
+    "tags": [
+      "músico",
+      "harmonia",
+      "composição"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c027",
+    "texto": "Um treinador de atletismo analisa a biomecânica de um corredor",
+    "tema": "esporte",
+    "dominio": "saude",
+    "tags": [
+      "treinador",
+      "atletismo",
+      "biomecânica",
+      "corredor"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c028",
+    "texto": "Um professor elabora questões para uma olimpíada de matemática",
+    "tema": "educacao",
+    "dominio": "escolar",
+    "tags": [
+      "professor",
+      "olimpíada",
+      "matemática"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c029",
+    "texto": "Um agricultor monitora a umidade do solo por sensores remotos",
+    "tema": "agricultura",
+    "dominio": "natureza",
+    "tags": [
+      "agricultor",
+      "solo",
+      "sensores",
+      "umidade"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c030",
+    "texto": "Um desenvolvedor de jogos ajusta a dificuldade de um nível",
+    "tema": "games",
+    "dominio": "software",
+    "tags": [
+      "desenvolvedor de jogos",
+      "jogos",
+      "dificuldade"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c031",
+    "texto": "Um historiador investiga manuscritos medievais empoeirados",
+    "tema": "historia",
+    "dominio": "cultura",
+    "tags": [
+      "historiador",
+      "manuscritos"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c032",
+    "texto": "Um químico realiza titulação para determinar concentração de ácido",
+    "tema": "quimica",
+    "dominio": "laboratorio",
+    "tags": [
+      "químico",
+      "titulação",
+      "ácido"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c033",
+    "texto": "Um detetive analisa padrões de tráfego para capturar ladrão",
+    "tema": "investigacao",
+    "dominio": "policial",
+    "tags": [
+      "detetive",
+      "ladrão",
+      "tráfego"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c034",
+    "texto": "Um biólogo cataloga espécies raras em expedição na floresta",
+    "tema": "biologia",
+    "dominio": "natureza",
+    "tags": [
+      "biólogo",
+      "espécies",
+      "floresta",
+      "espécie"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c035",
+    "texto": "Um engenheiro calcula tensões em estrutura de concreto armado",
+    "tema": "engenharia",
+    "dominio": "infraestrutura",
+    "tags": [
+      "engenheiro",
+      "estrutura",
+      "concreto",
+      "tensões"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c036",
+    "texto": "Um programador depura algoritmo de ordenação complexo",
+    "tema": "tecnologia",
+    "dominio": "software",
+    "tags": [
+      "programador",
+      "algoritmo"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c037",
+    "texto": "Um meteorologista prevê raios usando dados de pressão atmosférica",
+    "tema": "meteorologia",
+    "dominio": "clima",
+    "tags": [
+      "meteorologista",
+      "pressão atmosférica",
+      "raios"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c038",
+    "texto": "Um estrategista avalia risco de emboscada em mapa tático",
+    "tema": "estrategia",
+    "dominio": "militar",
+    "tags": [
+      "estrategista",
+      "emboscada",
+      "tático"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c039",
+    "texto": "Um médico interpreta eletrocardiograma para detectar arritmia",
+    "tema": "medicina",
+    "dominio": "saude",
+    "tags": [
+      "médico",
+      "eletrocardiograma",
+      "arritmia"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c040",
+    "texto": "Um arqueólogo escava túmulo faraônico com ferramentas delicadas",
+    "tema": "arqueologia",
+    "dominio": "historia",
+    "tags": [
+      "arqueólogo",
+      "escava",
+      "túmulo",
+      "faraônico"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c041",
+    "texto": "Um astronauta calcula trajetória para interceptar cometa",
+    "tema": "navegacao",
+    "dominio": "transporte",
+    "tags": [
+      "astronauta",
+      "trajetória",
+      "cometa"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c042",
+    "texto": "Um advogado monta defesa com jurisprudência e precedentes",
+    "tema": "direito",
+    "dominio": "juridico",
+    "tags": [
+      "advogado",
+      "jurisprudência",
+      "defesa",
+      "precedentes"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c043",
+    "texto": "Um urbanista planeja rede de metrô evitando zonas de inundação",
+    "tema": "urbanismo",
+    "dominio": "cidades",
+    "tags": [
+      "urbanista",
+      "metrô"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c044",
+    "texto": "Um chef equilibra notas doces, salgadas e ácidas do molho",
+    "tema": "culinaria",
+    "dominio": "alimentacao",
+    "tags": [
+      "chef",
+      "molho"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c045",
+    "texto": "Um músico harmoniza melodia usando teoria modal",
+    "tema": "musica",
+    "dominio": "arte",
+    "tags": [
+      "músico",
+      "melodia",
+      "teoria modal"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c046",
+    "texto": "Um geólogo analisa camadas de rocha para prever deslizamento",
+    "tema": "geologia",
+    "dominio": "natureza",
+    "tags": [
+      "geólogo",
+      "rocha",
+      "deslizamento"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c047",
+    "texto": "Um inspetor verifica validade de documentos em posto de fronteira",
+    "tema": "fiscalizacao",
+    "dominio": "governo",
+    "tags": [
+      "inspetor",
+      "documentos",
+      "fronteira"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c048",
+    "texto": "Um piloto calcula altitude e velocidade para pouso seguro",
+    "tema": "navegacao",
+    "dominio": "transporte",
+    "tags": [
+      "piloto",
+      "pouso"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c049",
+    "texto": "Um bibliotecário pesquisa referências cruzadas em enciclopédias",
+    "tema": "biblioteconomia",
+    "dominio": "cultura",
+    "tags": [
+      "bibliotecário",
+      "enciclopédias",
+      "referências"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c050",
+    "texto": "Um cientista filtra ruído de sinal para captar mensagem extraterrestre",
+    "tema": "ciencia",
+    "dominio": "espacial",
+    "tags": [
+      "cientista",
+      "sinal",
+      "extraterrestre"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c051",
+    "texto": "Um professor corrige exercícios de proposições lógicas",
+    "tema": "educacao",
+    "dominio": "escolar",
+    "tags": [
+      "professor"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  },
+  {
+    "id": "c052",
+    "texto": "Um agricultor decide irrigar apenas setores com umidade crítica",
+    "tema": "agricultura",
+    "dominio": "natureza",
+    "tags": [
+      "agricultor",
+      "irrigar",
+      "umidade"
+    ],
+    "props_min": 2,
+    "props_max": 4
+  }
+]
