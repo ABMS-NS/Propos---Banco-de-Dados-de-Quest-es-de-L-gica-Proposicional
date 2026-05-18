@@ -6,6 +6,8 @@ License: MIT
 Project-URL: Source, https://github.com/anomalyco/banco-questoes
 Requires-Python: >=3.10
 Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: license-file
 
 # Banco de Questões de Lógica Proposicional
 
