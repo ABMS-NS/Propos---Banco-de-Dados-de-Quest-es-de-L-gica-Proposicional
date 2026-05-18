@@ -1,0 +1,11 @@
+pyproject.toml
+src/banco_questoes/__init__.py
+src/banco_questoes/banco.py
+src/banco_questoes/modelos.py
+src/banco_questoes.egg-info/PKG-INFO
+src/banco_questoes.egg-info/SOURCES.txt
+src/banco_questoes.egg-info/dependency_links.txt
+src/banco_questoes.egg-info/top_level.txt
+src/banco_questoes/utils/__init__.py
+src/banco_questoes/utils/analise.py
+src/banco_questoes/utils/enriquecedor.py

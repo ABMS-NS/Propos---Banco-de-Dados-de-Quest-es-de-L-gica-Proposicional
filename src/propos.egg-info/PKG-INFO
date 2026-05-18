@@ -1,0 +1,787 @@
+Metadata-Version: 2.4
+Name: propos
+Version: 0.1.0
+Summary: Banco de questões de lógica proposicional com contextos em linguagem natural
+License: MIT
+Project-URL: Source, https://github.com/anomalyco/banco-questoes
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+
+# Banco de Questões de Lógica Proposicional
+
+Banco de fórmulas de lógica proposicional com contextos em linguagem natural.
+Projetado para ser consumido por geradores de questões (LLMs, templates, etc.)
+de forma independente e escalável.
+
+---
+
+## Índice
+
+- [1. Primeiros passos (fazer tudo funcionar)](#1-primeiros-passos-fazer-tudo-funcionar)
+- [2. Como usar o banco (API completa)](#2-como-usar-o-banco-api-completa)
+- [3. Como adicionar novas questões e contextos](#3-como-adicionar-novas-questões-e-contextos)
+- [4. Como tudo funciona (arquitetura)](#4-como-tudo-funciona-arquitetura)
+- [5. Como atualizar o pip](#5-como-atualizar-o-pip)
+- [6. Erros comuns e soluções](#6-erros-comuns-e-soluções)
+- [7. Como contribuir / ajudar no desenvolvimento](#7-como-contribuir--ajudar-no-desenvolvimento)
+
+---
+
+## 1. Primeiros passos (fazer tudo funcionar)
+
+### Requisitos
+
+- **Python ≥ 3.10** (recomendado 3.12+)
+- **pip** (gerenciador de pacotes Python)
+
+Para verificar se você tem os requisitos:
+
+```bash
+python3 --version
+# Exemplo de saída: Python 3.12.3
+
+pip --version
+# Exemplo de saída: pip 24.0 from ... (python 3.12)
+```
+
+Se o comando `python3` não existir, tente `python`.
+
+### 1.1. Clone ou entre no repositório
+
+```bash
+cd "/caminho/para/banco de questões e contextos"
+```
+
+### 1.2. (Recomendado) Crie um ambiente virtual
+
+Isola as dependências do projeto do resto do sistema:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate      # Linux / macOS
+# ou
+.venv\Scripts\activate         # Windows
+```
+
+No terminal aparecerá `(.venv)` no início da linha, indicando que o
+ambiente virtual está ativo.
+
+### 1.3. Instale o pacote em modo editável
+
+```bash
+pip install -e .
+```
+
+Saída esperada:
+
+```
+Successfully built banco-questoes
+Installing collected packages: banco-questoes
+Successfully installed banco-questoes-0.1.0
+```
+
+O `-e` (editável) faz com que qualquer alteração nos arquivos `.py`
+seja refletida imediatamente, sem precisar reinstalar.
+
+### 1.4. Verifique se funcionou
+
+```bash
+python3 -c "from propos import BancoQuestoes; print('OK')"
+```
+
+Se imprimir `OK`, está tudo pronto.
+
+### 1.5. Execute os exemplos
+
+```bash
+python3 exemplos/01_usar_banco.py
+python3 exemplos/02_integrar_api.py
+```
+
+---
+
+## 2. Como usar o banco (API completa)
+
+### Carga de dados
+
+```python
+from propos import BancoQuestoes
+
+banco = BancoQuestoes()
+
+# JSONs enriquecidos (com metadados)
+banco.carregar_contextos_json("dados/contextos.json")
+banco.carregar_questoes_json("dados/questoes.json")
+
+# JSONs legados (só listas de strings — ele enriquece automaticamente)
+banco.carregar_json_legado("dados/contextos_legado.json", "dados/questoes_legado.json")
+```
+
+| Função | Descrição |
+|--------|-----------|
+| `carregar_contextos_json(caminho)` | Carrega contextos de JSON (lista de objetos ou `{"contextos": [...]}`) |
+| `carregar_questoes_json(caminho)` | Carrega questões de JSON (lista de objetos ou `{"questoes": [...]}`) |
+| `carregar_json_legado(ctx_path, q_path)` | Carrega JSONs antigos (só arrays de strings) e enriquece |
+
+### Filtros
+
+```python
+# ─── Filtros de questões ───
+
+# Por operador lógico
+banco.filtrar_questoes(operador="->")          # condicionais
+banco.filtrar_questoes(operador="^")           # conjunções
+banco.filtrar_questoes(operador="v")           # disjunções
+banco.filtrar_questoes(operador="~")           # negações
+banco.filtrar_questoes(operador="<->")         # bicondicionais
+
+# Por complexidade (quantidade de operadores)
+banco.filtrar_questoes(complexidade_max=3)     # até 3 operadores
+banco.filtrar_questoes(complexidade_min=4)     # 4 ou mais operadores
+
+# Por número de variáveis proposicionais
+banco.filtrar_questoes(num_variaveis=2)        # fórmulas com P, Q apenas
+
+# Por tipo de questão recomendado
+banco.filtrar_questoes(tipo="INFERENCIA")
+banco.filtrar_questoes(tipo="TABELA_VERDADE")
+banco.filtrar_questoes(tipo="EQUIVALENCIA")
+banco.filtrar_questoes(tipo="CIRCUNSTANCIAS_FALSAS")
+banco.filtrar_questoes(tipo="VALOR_VERDADE")
+
+# Todos os filtros combinados
+banco.filtrar_questoes(
+    operador="->",
+    complexidade_max=3,
+    num_variaveis=3,
+    tipo="INFERENCIA",
+)
+
+# ─── Filtros de contextos ───
+
+banco.filtrar_contextos(tema="medicina")          # por tema
+banco.filtrar_contextos(dominio="saude")          # por domínio
+banco.filtrar_contextos(tag="detetive")           # por tag
+banco.filtrar_contextos(props_min=2, props_max=3) # compatível com 2-3 vars
+
+# Combinados
+banco.filtrar_contextos(tema="tecnologia", tag="programador")
+```
+
+### Combinação (sorteio inteligente)
+
+```python
+# Sorteio sem filtros (qualquer combinação)
+formula, contexto = banco.sortear_combinacao()
+
+# Sorteio com tema específico
+formula, contexto = banco.sortear_combinacao(tema="medicina")
+
+# Sorteio com filtro de complexidade
+formula, contexto = banco.sortear_combinacao(complexidade_max=3)
+
+# Sorteio com tipo de questão
+formula, contexto = banco.sortear_combinacao(tipo="TABELA_VERDADE")
+
+# Tudo junto
+formula, contexto = banco.sortear_combinacao(
+    tema="engenharia",
+    complexidade_max=4,
+    tipo="INFERENCIA",
+)
+
+# Contextos compatíveis com uma fórmula
+compat = banco.contextos_compatíveis(formula)
+# → [Contexto, Contexto, ...]
+
+# Fórmulas compatíveis com um contexto
+compat = banco.questoes_compatíveis(contexto)
+# → [FormulaQuestao, FormulaQuestao, ...]
+```
+
+### Listagens
+
+```python
+banco.listar_temas()        # ['agricultura', 'medicina', 'tecnologia', ...]
+banco.listar_dominios()     # ['cidades', 'juridico', 'saude', ...]
+banco.listar_operadores()   # ['->', '<->', '^', 'v', '~']
+banco.listar_tipos()        # ['CIRCUNSTANCIAS_FALSAS', 'EQUIVALENCIA', ...]
+```
+
+### Estatísticas
+
+```python
+stats = banco.estatisticas()
+
+stats["total_questoes"]        # 35
+stats["total_contextos"]       # 52
+stats["complexidade_media"]    # 3.4
+stats["complexidade_min"]      # 1
+stats["complexidade_max"]      # 5
+stats["variaveis_media"]       # 3.5
+stats["distribuicao_tipos"]    # {"INFERENCIA": 22, "TABELA_VERDADE": 8, ...}
+stats["distribuicao_temas"]    # {"investigacao": 3, "medicina": 2, ...}
+```
+
+### Exportação
+
+```python
+# Exporta o banco inteiro para um único JSON
+banco.exportar_json("dados/banco_completo.json")
+# → {"contextos": [...], "questoes": [...]}
+```
+
+### Acessar objetos diretamente
+
+```python
+# Dicts internos
+banco.contextos     # dict[str, Contexto]
+banco.questoes      # dict[str, FormulaQuestao]
+
+# Iterar
+for q in banco.questoes.values():
+    print(q.id, q.formula, q.tipos_recomendados)
+```
+
+### Dataclasses
+
+**`Contexto`:**
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `id` | `str` | Identificador único (ex: `"c001"`) |
+| `texto` | `str` | Descrição em linguagem natural |
+| `tema` | `str` | Categoria temática (ex: `"medicina"`) |
+| `dominio` | `str` | Domínio geral (ex: `"saude"`) |
+| `tags` | `list[str]` | Palavras-chave para busca |
+| `props_min` | `int` | Mínimo de proposições que suporta |
+| `props_max` | `int` | Máximo de proposições que suporta |
+
+**`FormulaQuestao`:**
+
+| Campo | Tipo | Descrição |
+|-------|------|-----------|
+| `id` | `str` | Identificador único (ex: `"q001"`) |
+| `formula` | `str` | Expressão lógica (ex: `"P -> Q"`) |
+| `variaveis` | `list[str]` | Símbolos proposicionais (ex: `["P", "Q"]`) |
+| `operadores` | `list[str]` | Operadores presentes (ex: `["->"]`) |
+| `complexidade` | `int` | Contagem total de operadores |
+| `tipos_recomendados` | `list[str]` | Tipos de questão sugeridos |
+| `num_variaveis` | `int` | Quantidade de variáveis |
+
+---
+
+## 3. Como adicionar novas questões e contextos
+
+### Método 1: CLI (terminal)
+
+```bash
+# Adicionar uma fórmula (metadados extraídos automaticamente)
+python -m propos.adicionador questao "P <-> (Q v ~R)"
+
+# Adicionar um contexto (tema classificado automaticamente)
+python -m propos.adicionador contexto "Um psicólogo analisa padrões de comportamento"
+```
+
+O CLI:
+1. Lê o JSON atual (`dados/questoes.json` ou `dados/contextos.json`)
+2. Gera o próximo ID sequencial (`q036`, `q037`, ... ou `c053`, `c054`, ...)
+3. Extrai/classifica metadados automaticamente
+4. Salva de volta no JSON
+
+### Método 2: Python (programático)
+
+```python
+from propos.adicionador import (
+    adicionar_questao,
+    adicionar_contexto,
+    adicionar_varias_questoes,
+    adicionar_varios_contextos,
+)
+
+# Uma questão
+adicionar_questao("P <-> (Q v ~R)", "dados/questoes.json")
+
+# Várias de uma vez
+adicionar_varias_questoes(
+    ["P -> Q", "(P v Q) ^ ~R", "P ^ (Q -> R)"],
+    "dados/questoes.json",
+)
+
+# Contexto com classificação automática
+adicionar_contexto(
+    "Um psicólogo analisa padrões de comportamento",
+    "dados/contextos.json",
+)
+
+# Contexto com dados manuais (substitui a classificação automática)
+adicionar_contexto(
+    "Um psicólogo analisa padrões de comportamento",
+    "dados/contextos.json",
+    tema="psicologia",
+    dominio="saude",
+    tags=["psicólogo", "comportamento"],
+    props_min=2,
+    props_max=3,
+)
+
+# Vários contextos de uma vez
+adicionar_varios_contextos(
+    [
+        "Um veterinário examina um animal doente",
+        "Um economista analisa a inflação do país",
+    ],
+    "dados/contextos.json",
+)
+```
+
+### Método 3: Editar o JSON diretamente
+
+Edite `dados/questoes.json` e adicione um novo objeto:
+
+```json
+{
+  "id": "q036",
+  "formula": "P <-> (Q v ~R)",
+  "variaveis": ["P", "Q", "R"],
+  "operadores": ["<->", "v", "~"],
+  "complexidade": 3,
+  "tipos_recomendados": ["EQUIVALENCIA"],
+  "num_variaveis": 3
+}
+```
+
+Ou edite `dados/contextos.json`:
+
+```json
+{
+  "id": "c053",
+  "texto": "Um psicólogo analisa padrões de comportamento",
+  "tema": "psicologia",
+  "dominio": "saude",
+  "tags": ["psicólogo", "comportamento"],
+  "props_min": 2,
+  "props_max": 4
+}
+```
+
+> ⚠️ **Cuidado com o JSON**: se editar manualmente, preste atenção nas vírgulas.
+> Um JSON mal formatado quebra os métodos de carga. Use um validador JSON
+> (ex: `python3 -m json.tool dados/questoes.json`) para verificar.
+
+---
+
+## 4. Como tudo funciona (arquitetura)
+
+### Estrutura do projeto
+
+```
+banco de questões e contextos/
+│
+├── pyproject.toml                  → Configuração do pacote pip
+├── README.md                       → Esta documentação
+│
+├── src/propos/             → Pacote Python (importável)
+│   │
+│   ├── __init__.py                 → Exporta: BancoQuestoes, Contexto, FormulaQuestao
+│   │
+│   ├── modelos.py                  → Dataclasses dos dados
+│   │   ├── Contexto                →   id, texto, tema, dominio, tags, props_min/max
+│   │   └── FormulaQuestao          →   id, formula, variaveis, operadores, complexidade, tipos
+│   │
+│   ├── banco.py                    → Classe principal
+│   │   └── BancoQuestoes           →   Carga, filtros, combinação, estatísticas, exportação
+│   │
+│   ├── adicionador.py              → Utilitário para adicionar itens ao banco
+│   │   ├── adicionar_questao()     →   Adiciona fórmula com metadados automáticos
+│   │   ├── adicionar_contexto()    →   Adiciona contexto (tema automático ou manual)
+│   │   ├── adicionar_varias_questoes()  →   Lote de fórmulas
+│   │   ├── adicionar_varios_contextos() →   Lote de contextos
+│   │   └── cli_adicionar_questao() →   Interface de linha de comando
+│   │
+│   └── utils/
+│       ├── analise.py              → Análise de fórmulas lógicas
+│       │   ├── extrair_variaveis()       →   Extrai letras maiúsculas (P, Q, R...)
+│       │   ├── extrair_operadores()      →   Detecta ->, ^, v, ~, <->
+│       │   ├── calcular_complexidade()   →   Soma total de operadores
+│       │   └── classificar_tipos()       →   INFERENCIA, TABELA_VERDADE, etc.
+│       │
+│       └── enriquecedor.py         → Migração e classificação
+│           ├── classificar_contexto()    →   Tema por palavras-chave
+│           ├── enriquecer_contextos()    →   JSON antigo → novo formato
+│           └── enriquecer_questoes()     →   JSON antigo → novo formato
+│
+├── dados/                          → Dados do banco
+│   ├── contextos.json              →  52 contextos enriquecidos
+│   ├── questoes.json               →  35 questões enriquecidas
+│   ├── contextos_legado.json       →  Formato original (só strings)
+│   └── questoes_legado.json        →  Formato original (só strings)
+│
+└── exemplos/                       → Scripts de exemplo
+    ├── 01_usar_banco.py            →  Estatísticas, filtros e combinações
+    └── 02_integrar_api.py          →  Demonstração da API pública
+```
+
+### Fluxo de enriquecimento de fórmulas
+
+Quando uma fórmula entra no banco, ela passa por 4 etapas automáticas:
+
+```
+Entrada: "P -> (Q ^ ~R)"
+         │
+         ▼ 1. extrair_variaveis()
+         ["P", "Q", "R"]
+         │
+         ▼ 2. extrair_operadores()
+         ["->", "^", "~"]
+         │
+         ▼ 3. calcular_complexidade()
+                                      → 3 pontos (1-> + 1^ + 1~)
+         │
+         ▼ 4. classificar_tipos()
+         ┌────────────────────────────────────────────┐
+         │ "->" presente?          → Sim → INFERENCIA │
+         │ "~" aparece 2+ vezes?   → Não (~ aparece   │
+         │                             1 vez apenas)  │
+         │ "^" aparece 2+ vezes?   → Não              │
+         │ "v" presente?           → Não              │
+         │ Nenhum tipo?            → Não (já tem INF) │
+         └────────────────────────────────────────────┘
+         │
+         Saída: tipos = ["INFERENCIA"]
+```
+
+### Fluxo de classificação de contextos
+
+Cada contexto é classificado por **pontuação de palavras-chave**.
+O `enriquecedor.py` tem 27 temas mapeados:
+
+```python
+TEMA_KEYWORDS = [
+    ("investigacao", "policial", ["detetive", "roubo", "crime", ...]),
+    ("medicina",     "saude",    ["médico", "diagnóstico", "paciente", ...]),
+    ("tecnologia",   "software", ["programador", "bug", "sistema", ...]),
+    ...
+]
+```
+
+Para cada contexto, o algoritmo percorre todos os temas e conta
+quantas keywords aparecem no texto. O tema com mais pontos vence.
+
+Exemplo:
+```
+"Um detetive quer descobrir um roubo no banco"
+  → "detetive" ✓  (investigacao +1)
+  → "roubo"    ✓  (investigacao +1)
+  → 2 votos para investigacao, 0 para os outros
+  → tema = "investigacao"
+  → tags = ["detetive", "roubo"]
+```
+
+### Algoritmo de sorteio de combinações
+
+```
+sortear_combinacao(tema="medicina", complexidade_max=3)
+         │
+         ▼ Passo 1: Filtrar questões
+         banco.filtrar_questoes(complexidade_max=3)
+         → lista de fórmulas com <= 3 operadores
+         │
+         ▼ Passo 2: Embaralhar
+         random.shuffle(questoes) → ordem aleatória
+         │
+         ▼ Passo 3: Para cada fórmula...
+         │
+         ├── banco.contextos_compatíveis(q)
+         │   → contextos onde props_min <= q.num_variaveis <= props_max
+         │
+         ├── Se tema fornecido: filtra por tema
+         │   → [c for c in ctxs if c.tema == "medicina"]
+         │
+         ├── Se encontrou contextos: escolhe um aleatório
+         │   → return (q, random.choice(ctxs))
+         │
+         └── Se não: tenta a próxima fórmula
+         │
+         ▼ Se nenhuma combinação servir:
+         raise ValueError("Nenhuma combinação compatível")
+```
+
+### Tipos de questão (regras de classificação)
+
+| Tipo | Gatilho | Exemplo | Pergunta típica |
+|------|---------|---------|-----------------|
+| `INFERENCIA` | Contém `->` ou `→` | `P -> (Q ^ R)` | "Se P é verdadeiro, o que concluir?" |
+| `CIRCUNSTANCIAS_FALSAS` | Contém 2+ `~` | `~P ^ ~Q` | "Em que casos a fórmula é falsa?" |
+| `TABELA_VERDADE` | Contém 2+ `^` | `P ^ Q ^ R` | "É tautologia, contingência ou contradição?" |
+| `EQUIVALENCIA` | Contém `v` ou `\|` | `P v (Q ^ R)` | "Qual fórmula é equivalente?" |
+| `VALOR_VERDADE` | Nenhum dos acima (fallback) | `P` | "Qual o valor-verdade?" |
+
+Uma fórmula pode ter múltiplos tipos. Ex: `P -> (Q v R)` →
+`["INFERENCIA", "EQUIVALENCIA"]`.
+
+### Dependências
+
+**Zero dependências externas.** O projeto usa exclusivamente a
+biblioteca padrão do Python (≥ 3.10):
+
+| Módulo | Uso |
+|--------|-----|
+| `json` | Leitura e escrita dos dados |
+| `pathlib` | Manipulação de caminhos de arquivo |
+| `re` | Extração de variáveis das fórmulas |
+| `random` | Embaralhamento para sorteio |
+| `dataclasses` | Modelos tipados (Contexto, FormulaQuestao) |
+
+---
+
+## 5. Como atualizar o pip
+
+O pip é o gerenciador de pacotes do Python. Mantê-lo atualizado
+evita erros de instalação.
+
+### Verificar versão atual
+
+```bash
+pip --version
+```
+
+### Atualizar o pip
+
+```bash
+# Linux / macOS
+python3 -m pip install --upgrade pip
+
+# Windows
+python -m pip install --upgrade pip
+```
+
+### Se der erro de permissão
+
+No Linux/macOS, se aparecer algo como:
+
+```
+PermissionError: [Errno 13] Permission denied: ...
+```
+
+Use o ambiente virtual (recomendado) ou o `--user`:
+
+```bash
+python3 -m pip install --upgrade pip --user
+```
+
+### Atualizar o pip dentro do ambiente virtual
+
+Se você criou um ambiente virtual (`.venv`), o pip já fica isolado:
+
+```bash
+# Com o ambiente virtual ativo
+source .venv/bin/activate
+python3 -m pip install --upgrade pip
+```
+
+### Reinstalar o banco-questoes após atualizar o pip
+
+```bash
+# Se já instalou antes, reinstale:
+pip install -e .
+```
+
+---
+
+## 6. Erros comuns e soluções
+
+### `ModuleNotFoundError: No module named 'propos'`
+
+**Causa:** O pacote não está instalado ou o Python não está encontrando.
+
+**Soluções:**
+
+```bash
+# 1. Instale o pacote (da raiz do projeto)
+pip install -e .
+
+# 2. Verifique se instalou corretamente
+python3 -c "from propos import BancoQuestoes; print('OK')"
+
+# 3. Se estiver num ambiente virtual, ative-o primeiro
+source .venv/bin/activate  # Linux/macOS
+# ou
+.venv\Scripts\activate     # Windows
+
+# 4. Se ainda assim não funcionar, verifique o PYTHONPATH
+python3 -c "import sys; print(sys.path)"
+# Deve mostrar o caminho da pasta src/
+```
+
+### `FileNotFoundError: [Errno 2] No such file or directory: 'dados/...'`
+
+**Causa:** O script está sendo executado de um diretório diferente
+da raiz do projeto.
+
+**Solução:** Execute sempre do diretório raiz do projeto:
+
+```bash
+cd "/caminho/para/banco de questões e contextos"
+python3 exemplos/01_usar_banco.py
+```
+
+### `json.decoder.JSONDecodeError: Expecting ',' delimiter`
+
+**Causa:** Um dos arquivos JSON em `dados/` está mal formatado
+(geralmente após edição manual).
+
+**Soluções:**
+
+```bash
+# 1. Validar o JSON
+python3 -m json.tool dados/questoes.json
+
+# 2. Se mostrar erro, corrija manualmente o arquivo
+#    (geralmente falta vírgula entre objetos do array)
+
+# 3. Restaurar a partir do legado
+python3 -m propos.utils.enriquecedor
+```
+
+### `ValueError: Nenhuma combinação compatível encontrada...`
+
+**Causa:** Os filtros aplicados em `sortear_combinacao()` são muito
+restritivos e nenhum par contexto+fórmula atende.
+
+**Soluções:**
+
+```python
+# Alivie os filtros
+banco.sortear_combinacao()                              # sem filtros
+banco.sortear_combinacao(complexidade_max=5)            # mais fórmulas
+banco.sortear_combinacao(tema="medicina")               # sem limite de complexidade
+
+# Ou verifique quantos itens atendem cada filtro
+len(banco.filtrar_questoes(complexidade_max=3))         # quantas fórmulas?
+len(banco.filtrar_contextos(tema="medicina"))           # quantos contextos?
+```
+
+### `pip install -e .` dá erro de permissão
+
+**Causa:** Tentando instalar no Python do sistema sem permissão.
+
+**Solução:** Use um ambiente virtual:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e .
+```
+
+### O exemplo roda, mas a IDE marca `propos` como erro
+
+**Causa:** A IDE não sabe que `src/` é uma pasta de código fonte.
+
+**Soluções:**
+
+- **PyCharm:** Clique direito em `src/` → Mark Directory as → Sources Root
+- **VS Code:** Adicione ao `settings.json`:
+  ```json
+  {
+    "python.autoComplete.extraPaths": ["src"],
+    "python.analysis.extraPaths": ["src"]
+  }
+  ```
+- **Ou** instale o pacote: `pip install -e .` (a IDE reconhece de site-packages)
+
+### `git` reclama de permissão ou autenticação
+
+```bash
+# Verifique se o git está configurado
+git config --list
+
+# Configure seu usuário (se necessário)
+git config user.name "Seu Nome"
+git config user.email "seu@email.com"
+```
+
+### `python3` não encontrado (Linux)
+
+```bash
+# Ubuntu/Debian
+sudo apt update && sudo apt install python3 python3-pip python3-venv
+
+# Fedora
+sudo dnf install python3 python3-pip
+```
+
+---
+
+## 7. Como contribuir / ajudar no desenvolvimento
+
+### Formas de contribuir
+
+1. **Adicionar novas fórmulas** → use o `adicionador.py` ou edite
+   `dados/questoes.json` com mais expressões de lógica proposicional.
+
+2. **Adicionar novos contextos** → use o `adicionador.py` ou edite
+   `dados/contextos.json` com mais situações em linguagem natural.
+
+3. **Melhorar a classificação de temas** → edite a lista
+   `TEMA_KEYWORDS` em `src/propos/utils/enriquecedor.py`.
+   Adicione novas keywords para temas existentes ou crie novos temas.
+
+4. **Corrigir bugs** → veja a seção de [Erros comuns](#6-erros-comuns-e-soluções)
+   e abra uma issue ou envie um pull request.
+
+5. **Adicionar novos tipos de questão** → edite `classificar_tipos()`
+   em `src/propos/utils/analise.py`.
+
+6. **Melhorar a documentação** → este README pode sempre melhorar.
+   Erros de digitação, explicações mais claras, mais exemplos.
+
+7. **Escrever testes** → o projeto ainda não tem testes automatizados.
+
+### Fluxo de desenvolvimento recomendado
+
+```bash
+# 1. Crie um branch para sua alteração
+git checkout -b minha-melhoria
+
+# 2. Faça as alterações nos arquivos
+#    (como o pacote está em modo editável, as mudanças são
+#     refletidas imediatamente)
+
+# 3. Teste manualmente
+python3 -c "from propos import BancoQuestoes; b=BancoQuestoes(); ..."
+
+# 4. Commit
+git add .
+git commit -m "Descrição clara do que foi feito"
+
+# 5. Push
+git push origin minha-melhoria
+```
+
+### Boas práticas
+
+- **Mantenha os JSONs válidos**: sempre valide com
+  `python3 -m json.tool dados/questoes.json` após edições manuais.
+- **Use typing**: as funções usam type hints. Mantenha o padrão.
+- **Não quebre a compatibilidade**: se for mudar a estrutura dos dados,
+  atualize também o `carregar_json_legado()` e o `enriquecedor`.
+- **Adicione ao README**: se criar funcionalidade nova, documente.
+- **Python ≥ 3.10**: não use syntax sugar de versões posteriores.
+
+### O que pode ser melhorado (ideias)
+
+- **Testes automatizados** com `pytest` ou `unittest`
+- **Validação de fórmulas** (detectar parênteses desbalanceados,
+  operadores inválidos)
+- **Mais operadores** (⊕ para XOR, `↓` para NOR, `|` para NAND)
+- **Interface web** simples para navegar no banco
+- **Exportação para CSV/LaTeX** para usar em provas
+- **Geração de tabelas-verdade** a partir das fórmulas
+- **CLI mais completo** (comando `banco-questoes` global)
+
+---
+
+## Licença
+
+MIT

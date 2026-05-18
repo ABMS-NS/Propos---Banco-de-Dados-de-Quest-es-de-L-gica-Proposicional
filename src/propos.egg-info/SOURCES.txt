@@ -1,0 +1,13 @@
+README.md
+pyproject.toml
+src/propos/__init__.py
+src/propos/adicionador.py
+src/propos/banco.py
+src/propos/modelos.py
+src/propos.egg-info/PKG-INFO
+src/propos.egg-info/SOURCES.txt
+src/propos.egg-info/dependency_links.txt
+src/propos.egg-info/top_level.txt
+src/propos/utils/__init__.py
+src/propos/utils/analise.py
+src/propos/utils/enriquecedor.py
